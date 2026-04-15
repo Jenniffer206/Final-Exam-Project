@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Path Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background: #d4edda; color: #155724; }
+        .fail { background: #f8d7da; color: #721c24; }
+        img { max-width: 200px; max-height: 200px; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Image Path Test</h1>
+    <div id="results"></div>
+
+    <script>
+        const testPaths = [
+            '../Images/Bags/Bag (1).png',
+            '../Images/Blanket/Blanket (1).png',
+            '../Images/Hats/Hat (1).png',
+            '../Images/Kids/Kid_Product (1).png',
+            '../Images/Men/Men_Product (1).png',
+            '../Images/Women & Girls/W&G Product (1).png',
+            '../Images/Headband & Bath gloves/Headband (1).png',
+            'Images/Bags/Bag (1).png',
+            '../../Images/Bags/Bag (1).png',
+            '/Images/Bags/Bag (1).png'
+        ];
+
+        const resultsDiv = document.getElementById('results');
+        
+        async function testImage(path) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve({ path, success: true, width: img.width, height: img.height });
+                img.onerror = () => resolve({ path, success: false });
+                img.src = path;
+            });
+        }
+
+        async function runTests() {
+            resultsDiv.innerHTML = '<p>Testing paths...</p>';
+            
+            for (const path of testPaths) {
+                const result = await testImage(path);
+                const div = document.createElement('div');
+                div.className = `test ${result.success ? 'success' : 'fail'}`;
+                
+                if (result.success) {
+                    div.innerHTML = `
+                        <strong>✅ WORKING:</strong> ${path}<br>
+                        <small>Dimensions: ${result.width}x${result.height}</small>
+                        <img src="${path}" alt="Test image">
+                    `;
+                } else {
+                    div.innerHTML = `<strong>❌ FAILED:</strong> ${path}`;
+                }
+                
+                resultsDiv.appendChild(div);
+            }
+        }
+
+        runTests();
+    </script>
+</body>
+</html>
