@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - LUCKYCROCHET</title>
+    <!-- Main Shared Styles -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- Gallery-Specific Styles -->
+    <link rel="stylesheet" href="../cssfiles/gallery.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Order button on gallery items */
+        .gallery-item {
+            position: relative;
+        }
+        .gallery-order-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 5;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .gallery-item:hover .gallery-order-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gallery-order-btn:hover {
+            background: #128C7E;
+        }
+        .gallery-order-btn i {
+            font-size: 14px;
+        }
+        /* Adjust overlay when order button is present */
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+            padding-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER SECTION -->
+    <header>
+        <div class="promo-bar">
+            <span>Buy something new with <strong>10% Off</strong> your next purchase. Use promo code: <strong>LUCKY10</strong></span>
+        </div>
+
+        <nav class="main-nav" id="mainNav">
+            <a href="../index.html" class="logo">LUCKYCROCHET</a>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About Us</a>
+                <a href="../services.html">Services</a>
+                <a href="gallery.html" class="active">Gallery</a>
+                <a href="blog.html">Blog</a>
+                <a href="../contact.html">Contact</a>
+            </div>
+            
+            <div class="nav-icons">
+                <button id="darkModeToggle" class="dark-mode-btn" aria-label="Dark mode toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <span><i class="fas fa-search"></i></span>
+                <span><i class="fas fa-user"></i></span>
+                <span><i class="fas fa-shopping-bag"></i></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1>Our Gallery</h1>
+            <p>Explore our collection of handmade crochet creations - Click "Order Now" to purchase!</p>
+        </section>
+
+        <!-- Gallery Filter Buttons - REMOVED ACCESSORIES -->
+        <div class="gallery-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="bags">Bags</button>
+            <button class="filter-btn" data-filter="blankets">Blankets</button>
+            <button class="filter-btn" data-filter="hats">Hats</button>
+            <button class="filter-btn" data-filter="clothing">Clothing</button>
+            <button class="filter-btn" data-filter="kids">Kids</button>
+            <button class="filter-btn" data-filter="accessories">accessories</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be populated by JavaScript -->
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox" id="lightbox">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <button class="lightbox-prev" onclick="navigateLightbox(-1)">❮</button>
+            <button class="lightbox-next" onclick="navigateLightbox(1)">❯</button>
+            <img id="lightboxImg" src="" alt="">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+            <!-- Order button in lightbox -->
+            <button class="lightbox-order-btn" id="lightboxOrderBtn" onclick="orderFromLightbox()">
+                <i class="fab fa-whatsapp"></i> Order Now
+            </button>
+        </div>
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>LUCKYCROCHET</h4>
+                <p>Handmade with love, stitch by stitch. Quality crochet items for every occasion.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="../about.html">About Us</a>
+                    <a href="../services.html">Services</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="../contact.html">Contact</a>
+                    
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Shop by Category</h4>
+                <div class="footer-links">
+                    <a href="women-girls.html">Women & Girls</a>
+                    <a href="men.html">Men</a>
+                    <a href="kids.html">Baby & Children</a>
+                    <a href="bags.html">Bags</a>
+                    <a href="hats.html">Hats</a>
+                    <a href="blankets.html">Blankets</a>
+                    <a href="accessories.html">accessories</a>
+
+                    
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-phone"></i> +250 790 702 735</p>
+                <p><i class="fas fa-envelope"></i> niyomungerijenniffer@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> CHIC, Kigali city, Rwanda</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 LUCKYCROCHET - Handmade with Love. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Order Modal -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Place Your Order</h2>
+                <button class="modal-close" onclick="closeOrderPopup()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="selectedProductName" class="selected-product"></p>
+                <p id="selectedProductPrice" class="selected-price"></p>
+                <form id="orderForm" onsubmit="sendToWhatsApp(event)">
+                    <div class="form-group"><label>Full Name *</label><input type="text" id="customerName" required></div>
+                    <div class="form-group"><label>Email *</label><input type="email" id="customerEmail" required></div>
+                    <div class="form-group"><label>Phone *</label><input type="tel" id="customerPhone" required></div>
+                    <div class="form-group"><label>Quantity *</label><input type="number" id="orderQuantity" min="1" value="1" required></div>
+                    <div class="form-group"><label>Shipping Address *</label><textarea id="shippingAddress" rows="3" required></textarea></div>
+                    <div class="form-group"><label>Additional Notes</label><textarea id="orderNotes" rows="2"></textarea></div>
+                    <button type="submit" class="submit-order-btn"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src=""></script>
+    <script>
+        // =========================================
+        // GALLERY DATA - REDISTRIBUTED (Accessories removed)
+        // =========================================
+        const galleryData = [
+            // BAGS (10 images)
+            { category: 'bags', src: '../Images/Bags/Bag (1).png', caption: 'Crochet Bag - Style 1', price: '15000' },
+            { category: 'bags', src: '../Images/Bags/Bag (2).png', caption: 'Crochet Bag - Style 2', price: '18000' },
+            { category: 'bags', src: '../Images/Bags/Bag (3).png', caption: 'Crochet Bag - Style 3', price: '12000' },
+            { category: 'bags', src: '../Images/Bags/Bag (4).png', caption: 'Crochet Bag - Style 4', price: '20000' },
+            { category: 'bags', src: '../Images/Bags/Bag (5).png', caption: 'Crochet Bag - Style 5', price: '16000' },
+            { category: 'bags', src: '../Images/Bags/Bag (6).png', caption: 'Crochet Bag - Style 6', price: '14000' },
+            { category: 'bags', src: '../Images/Bags/Bag (7).png', caption: 'Crochet Bag - Style 7', price: '22000' },
+            { category: 'bags', src: '../Images/Bags/Bag (8).png', caption: 'Crochet Bag - Style 8', price: '17000' },
+            { category: 'bags', src: '../Images/Bags/Bag (9).png', caption: 'Crochet Bag - Style 9', price: '19000' },
+            { category: 'bags', src: '../Images/Bags/Bag (10).png', caption: 'Crochet Bag - Style 10', price: '25000' },
+
+            // BLANKETS (9 images)
+            { category: 'blankets', src: '../Images/Blanket/Blanket (1).png', caption: 'Handmade Blanket - Style 1', price: '35000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (2).png', caption: 'Handmade Blanket - Style 2', price: '40000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (3).png', caption: 'Handmade Blanket - Style 3', price: '30000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (4).png', caption: 'Handmade Blanket - Style 4', price: '45000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (5).png', caption: 'Handmade Blanket - Style 5', price: '38000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (6).png', caption: 'Handmade Blanket - Style 6', price: '42000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (7).png', caption: 'Handmade Blanket - Style 7', price: '28000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (8).png', caption: 'Handmade Blanket - Style 8', price: '50000' },
+            { category: 'blankets', src: '../Images/Blanket/Blanket (9).png', caption: 'Handmade Blanket - Style 9', price: '32000' },
+
+            // HATS (24 images)
+            { category: 'hats', src: '../Images/Hats/Hat (1).png', caption: 'Crochet Hat - Style 1', price: '8000' },
+            { category: 'hats', src: '../Images/Hats/Hat (2).png', caption: 'Crochet Hat - Style 2', price: '10000' },
+            { category: 'hats', src: '../Images/Hats/Hat (3).png', caption: 'Crochet Hat - Style 3', price: '9000' },
+            { category: 'hats', src: '../Images/Hats/Hat (4).png', caption: 'Crochet Hat - Style 4', price: '12000' },
+            { category: 'hats', src: '../Images/Hats/Hat (5).png', caption: 'Crochet Hat - Style 5', price: '7500' },
+            { category: 'hats', src: '../Images/Hats/Hat (6).png', caption: 'Crochet Hat - Style 6', price: '11000' },
+            { category: 'hats', src: '../Images/Hats/Hat (7).png', caption: 'Crochet Hat - Style 7', price: '8500' },
+            { category: 'hats', src: '../Images/Hats/Hat (8).png', caption: 'Crochet Hat - Style 8', price: '9500' },
+            { category: 'hats', src: '../Images/Hats/Hat (9).png', caption: 'Crochet Hat - Style 9', price: '13000' },
+            { category: 'hats', src: '../Images/Hats/Hat (10).png', caption: 'Crochet Hat - Style 10', price: '7000' },
+            { category: 'hats', src: '../Images/Hats/Hat (11).png', caption: 'Crochet Hat - Style 11', price: '10500' },
+            { category: 'hats', src: '../Images/Hats/Hat (12).png', caption: 'Crochet Hat - Style 12', price: '11500' },
+            { category: 'hats', src: '../Images/Hats/Hat (13).png', caption: 'Crochet Hat - Style 13', price: '8800' },
+            { category: 'hats', src: '../Images/Hats/Hat (14).png', caption: 'Crochet Hat - Style 14', price: '9200' },
+            { category: 'hats', src: '../Images/Hats/Hat (15).png', caption: 'Crochet Hat - Style 15', price: '10800' },
+            { category: 'hats', src: '../Images/Hats/Hat (16).png', caption: 'Crochet Hat - Style 16', price: '8200' },
+            { category: 'hats', src: '../Images/Hats/Hat (17).png', caption: 'Crochet Hat - Style 17', price: '9800' },
+            { category: 'hats', src: '../Images/Hats/Hat (18).png', caption: 'Crochet Hat - Style 18', price: '12500' },
+            { category: 'hats', src: '../Images/Hats/Hat (19).png', caption: 'Crochet Hat - Style 19', price: '7800' },
+            { category: 'hats', src: '../Images/Hats/Hat (20).png', caption: 'Crochet Hat - Style 20', price: '10200' },
+            { category: 'hats', src: '../Images/Hats/Hat (21).png', caption: 'Crochet Hat - Style 21', price: '11800' },
+            { category: 'hats', src: '../Images/Hats/Hat (22).png', caption: 'Crochet Hat - Style 22', price: '8900' },
+            { category: 'hats', src: '../Images/Hats/Hat (23).png', caption: 'Crochet Hat - Style 23', price: '11200' },
+            { category: 'hats', src: '../Images/Hats/Hat (24).png', caption: 'Crochet Hat - Style 24', price: '9500' },
+
+            // KIDS (31 images)
+            { category: 'kids', src: '../Images/Kids/Kid_Product (1).png', caption: 'Kids Crochet - Style 1', price: '10000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (2).png', caption: 'Kids Crochet - Style 2', price: '12000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (3).png', caption: 'Kids Crochet - Style 3', price: '8000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (4).png', caption: 'Kids Crochet - Style 4', price: '15000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (5).png', caption: 'Kids Crochet - Style 5', price: '9000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (6).png', caption: 'Kids Crochet - Style 6', price: '11000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (7).png', caption: 'Kids Crochet - Style 7', price: '13000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (8).png', caption: 'Kids Crochet - Style 8', price: '7000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (9).png', caption: 'Kids Crochet - Style 9', price: '14000' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (10).png', caption: 'Kids Crochet - Style 10', price: '8500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (11).png', caption: 'Kids Crochet - Style 11', price: '10500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (12).png', caption: 'Kids Crochet - Style 12', price: '12500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (13).png', caption: 'Kids Crochet - Style 13', price: '9500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (14).png', caption: 'Kids Crochet - Style 14', price: '11500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (15).png', caption: 'Kids Crochet - Style 15', price: '7500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (16).png', caption: 'Kids Crochet - Style 16', price: '13500' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (21).png', caption: 'Kids Crochet - Style 21', price: '8200' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (23).png', caption: 'Kids Crochet - Style 23', price: '12200' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (24).png', caption: 'Kids Crochet - Style 24', price: '9200' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (25).png', caption: 'Kids Crochet - Style 25', price: '11200' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (26).png', caption: 'Kids Crochet - Style 26', price: '7800' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (27).png', caption: 'Kids Crochet - Style 27', price: '12800' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (28).png', caption: 'Kids Crochet - Style 28', price: '8900' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (29).png', caption: 'Kids Crochet - Style 29', price: '10900' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (30).png', caption: 'Kids Crochet - Style 30', price: '9900' },
+            { category: 'kids', src: '../Images/Kids/Kid_Product (31).png', caption: 'Kids Crochet - Style 31', price: '11900' },
+
+            // MEN (27 images) + HEADBAND (9 images) = 36 in clothing
+            { category: 'clothing', src: '../Images/Men/Men_Product (1).png', caption: 'Men\'s Crochet - Style 1', price: '20000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (2).png', caption: 'Men\'s Crochet - Style 2', price: '22000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (3).png', caption: 'Men\'s Crochet - Style 3', price: '18000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (4).png', caption: 'Men\'s Crochet - Style 4', price: '25000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (5).png', caption: 'Men\'s Crochet - Style 5', price: '21000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (6).png', caption: 'Men\'s Crochet - Style 6', price: '23000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (7).png', caption: 'Men\'s Crochet - Style 7', price: '19000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (8).png', caption: 'Men\'s Crochet - Style 8', price: '26000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (9).png', caption: 'Men\'s Crochet - Style 9', price: '17000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (10).png', caption: 'Men\'s Crochet - Style 10', price: '24000' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (11).png', caption: 'Men\'s Crochet - Style 11', price: '20500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (12).png', caption: 'Men\'s Crochet - Style 12', price: '22500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (13).png', caption: 'Men\'s Crochet - Style 13', price: '18500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (14).png', caption: 'Men\'s Crochet - Style 14', price: '25500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (15).png', caption: 'Men\'s Crochet - Style 15', price: '21500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (16).png', caption: 'Men\'s Crochet - Style 16', price: '23500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (17).png', caption: 'Men\'s Crochet - Style 17', price: '19500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (18).png', caption: 'Men\'s Crochet - Style 18', price: '26500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (19).png', caption: 'Men\'s Crochet - Style 19', price: '17500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (20).png', caption: 'Men\'s Crochet - Style 20', price: '24500' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (21).png', caption: 'Men\'s Crochet - Style 21', price: '20800' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (22).png', caption: 'Men\'s Crochet - Style 22', price: '22800' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (23).png', caption: 'Men\'s Crochet - Style 23', price: '18800' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (24).png', caption: 'Men\'s Crochet - Style 24', price: '25800' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (25).png', caption: 'Men\'s Crochet - Style 25', price: '21800' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (26).png', caption: 'Men\'s Crochet - Style 26', price: '23800' },
+            { category: 'clothing', src: '../Images/Men/Men_Product (27).png', caption: 'Men\'s Crochet - Style 27', price: '19800' },
+            
+            // HEADBAND images redistributed to clothing (9 of them)
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (1).png', caption: 'Crochet Headband - Style 1', price: '5000' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (2).png', caption: 'Crochet Headband - Style 2', price: '5500' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (3).png', caption: 'Crochet Headband - Style 3', price: '4500' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (4).png', caption: 'Crochet Headband - Style 4', price: '6000' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (5).png', caption: 'Crochet Headband - Style 5', price: '5200' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (6).png', caption: 'Crochet Headband - Style 6', price: '4800' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (7).png', caption: 'Crochet Headband - Style 7', price: '5800' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (8).png', caption: 'Crochet Headband - Style 8', price: '4200' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (9).png', caption: 'Crochet Headband - Style 9', price: '6200' },
+
+            // WOMEN & GIRLS (105 images) + remaining HEADBAND (9 images) = 114 in clothing
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (1).png', caption: 'Women\'s Crochet - Style 1', price: '15000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (2).png', caption: 'Women\'s Crochet - Style 2', price: '18000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (3).png', caption: 'Women\'s Crochet - Style 3', price: '12000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (4).png', caption: 'Women\'s Crochet - Style 4', price: '20000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (5).png', caption: 'Women\'s Crochet - Style 5', price: '16000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (6).png', caption: 'Women\'s Crochet - Style 6', price: '14000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (7).png', caption: 'Women\'s Crochet - Style 7', price: '22000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (8).png', caption: 'Women\'s Crochet - Style 8', price: '17000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (9).png', caption: 'Women\'s Crochet - Style 9', price: '19000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (10).png', caption: 'Women\'s Crochet - Style 10', price: '25000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (11).png', caption: 'Women\'s Crochet - Style 11', price: '13000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (12).png', caption: 'Women\'s Crochet - Style 12', price: '21000' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (13).png', caption: 'Women\'s Crochet - Style 13', price: '15500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (14).png', caption: 'Women\'s Crochet - Style 14', price: '18500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (15).png', caption: 'Women\'s Crochet - Style 15', price: '12500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (16).png', caption: 'Women\'s Crochet - Style 16', price: '20500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (17).png', caption: 'Women\'s Crochet - Style 17', price: '16500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (18).png', caption: 'Women\'s Crochet - Style 18', price: '14500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (19).png', caption: 'Women\'s Crochet - Style 19', price: '22500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (20).png', caption: 'Women\'s Crochet - Style 20', price: '17500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (21).png', caption: 'Women\'s Crochet - Style 21', price: '19500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (22).png', caption: 'Women\'s Crochet - Style 22', price: '25500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (23).png', caption: 'Women\'s Crochet - Style 23', price: '13500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (24).png', caption: 'Women\'s Crochet - Style 24', price: '21500' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (25).png', caption: 'Women\'s Crochet - Style 25', price: '15800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (26).png', caption: 'Women\'s Crochet - Style 26', price: '18800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (27).png', caption: 'Women\'s Crochet - Style 27', price: '12800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (28).png', caption: 'Women\'s Crochet - Style 28', price: '20800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (29).png', caption: 'Women\'s Crochet - Style 29', price: '16800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (30).png', caption: 'Women\'s Crochet - Style 30', price: '14800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (31).png', caption: 'Women\'s Crochet - Style 31', price: '22800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (32).png', caption: 'Women\'s Crochet - Style 32', price: '17800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (33).png', caption: 'Women\'s Crochet - Style 33', price: '19800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (34).png', caption: 'Women\'s Crochet - Style 34', price: '25800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (35).png', caption: 'Women\'s Crochet - Style 35', price: '13800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (36).png', caption: 'Women\'s Crochet - Style 36', price: '21800' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (37).png', caption: 'Women\'s Crochet - Style 37', price: '15200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (38).png', caption: 'Women\'s Crochet - Style 38', price: '18200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (39).png', caption: 'Women\'s Crochet - Style 39', price: '12200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (40).png', caption: 'Women\'s Crochet - Style 40', price: '20200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (41).png', caption: 'Women\'s Crochet - Style 41', price: '16200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (42).png', caption: 'Women\'s Crochet - Style 42', price: '14200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (43).png', caption: 'Women\'s Crochet - Style 43', price: '22200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (44).png', caption: 'Women\'s Crochet - Style 44', price: '17200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (45).png', caption: 'Women\'s Crochet - Style 45', price: '19200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (46).png', caption: 'Women\'s Crochet - Style 46', price: '25200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (47).png', caption: 'Women\'s Crochet - Style 47', price: '13200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (48).png', caption: 'Women\'s Crochet - Style 48', price: '21200' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (49).png', caption: 'Women\'s Crochet - Style 49', price: '15600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (50).png', caption: 'Women\'s Crochet - Style 50', price: '18600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (51).png', caption: 'Women\'s Crochet - Style 51', price: '12600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (52).png', caption: 'Women\'s Crochet - Style 52', price: '20600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (53).png', caption: 'Women\'s Crochet - Style 53', price: '16600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (54).png', caption: 'Women\'s Crochet - Style 54', price: '14600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (55).png', caption: 'Women\'s Crochet - Style 55', price: '22600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (56).png', caption: 'Women\'s Crochet - Style 56', price: '17600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (57).png', caption: 'Women\'s Crochet - Style 57', price: '19600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (58).png', caption: 'Women\'s Crochet - Style 58', price: '25600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (59).png', caption: 'Women\'s Crochet - Style 59', price: '13600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (60).png', caption: 'Women\'s Crochet - Style 60', price: '21600' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (61).png', caption: 'Women\'s Crochet - Style 61', price: '15400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (62).png', caption: 'Women\'s Crochet - Style 62', price: '18400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (63).png', caption: 'Women\'s Crochet - Style 63', price: '12400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (64).png', caption: 'Women\'s Crochet - Style 64', price: '20400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (65).png', caption: 'Women\'s Crochet - Style 65', price: '16400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (66).png', caption: 'Women\'s Crochet - Style 66', price: '14400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (67).png', caption: 'Women\'s Crochet - Style 67', price: '22400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (68).png', caption: 'Women\'s Crochet - Style 68', price: '17400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (69).png', caption: 'Women\'s Crochet - Style 69', price: '19400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (70).png', caption: 'Women\'s Crochet - Style 70', price: '25400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (71).png', caption: 'Women\'s Crochet - Style 71', price: '13400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (72).png', caption: 'Women\'s Crochet - Style 72', price: '21400' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (73).png', caption: 'Women\'s Crochet - Style 73', price: '15700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (74).png', caption: 'Women\'s Crochet - Style 74', price: '18700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (75).png', caption: 'Women\'s Crochet - Style 75', price: '12700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (76).png', caption: 'Women\'s Crochet - Style 76', price: '20700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (77).png', caption: 'Women\'s Crochet - Style 77', price: '16700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (78).png', caption: 'Women\'s Crochet - Style 78', price: '14700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (79).png', caption: 'Women\'s Crochet - Style 79', price: '22700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (80).png', caption: 'Women\'s Crochet - Style 80', price: '17700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (81).png', caption: 'Women\'s Crochet - Style 81', price: '19700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (82).png', caption: 'Women\'s Crochet - Style 82', price: '25700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (83).png', caption: 'Women\'s Crochet - Style 83', price: '13700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (84).png', caption: 'Women\'s Crochet - Style 84', price: '21700' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (85).png', caption: 'Women\'s Crochet - Style 85', price: '15300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (86).png', caption: 'Women\'s Crochet - Style 86', price: '18300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (87).png', caption: 'Women\'s Crochet - Style 87', price: '12300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (88).png', caption: 'Women\'s Crochet - Style 88', price: '20300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (89).png', caption: 'Women\'s Crochet - Style 89', price: '16300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (90).png', caption: 'Women\'s Crochet - Style 90', price: '14300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (91).png', caption: 'Women\'s Crochet - Style 91', price: '22300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (92).png', caption: 'Women\'s Crochet - Style 92', price: '17300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (93).png', caption: 'Women\'s Crochet - Style 93', price: '19300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (94).png', caption: 'Women\'s Crochet - Style 94', price: '25300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (95).png', caption: 'Women\'s Crochet - Style 95', price: '13300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (96).png', caption: 'Women\'s Crochet - Style 96', price: '21300' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (97).png', caption: 'Women\'s Crochet - Style 97', price: '15900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (98).png', caption: 'Women\'s Crochet - Style 98', price: '18900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (99).png', caption: 'Women\'s Crochet - Style 99', price: '12900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (100).png', caption: 'Women\'s Crochet - Style 100', price: '20900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (101).png', caption: 'Women\'s Crochet - Style 101', price: '16900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (102).png', caption: 'Women\'s Crochet - Style 102', price: '14900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (103).png', caption: 'Women\'s Crochet - Style 103', price: '22900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (104).png', caption: 'Women\'s Crochet - Style 104', price: '17900' },
+            { category: 'clothing', src: '../Images/Women & Girls/W&G Product (105).png', caption: 'Women\'s Crochet - Style 105', price: '19900' },
+            
+            // Remaining HEADBAND images (9 images) redistributed to clothing
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (10).png', caption: 'Crochet Headband - Style 10', price: '5000' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (11).png', caption: 'Crochet Headband - Style 11', price: '5500' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (12).png', caption: 'Crochet Headband - Style 12', price: '4500' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (13).png', caption: 'Crochet Headband - Style 13', price: '6000' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (14).png', caption: 'Crochet Headband - Style 14', price: '5200' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (15).png', caption: 'Crochet Headband - Style 15', price: '4800' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (16).png', caption: 'Crochet Headband - Style 16', price: '5800' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (17).png', caption: 'Crochet Headband - Style 17', price: '4200' },
+            { category: 'clothing', src: '../Images/Headband & Bath gloves/Head Product  (18).png', caption: 'Crochet Headband - Style 18', price: '6200' }
+        ];
+
+        // Lightbox navigation
+        let currentLightboxIndex = 0;
+        let currentFilteredItems = [];
+        let currentLightboxItem = null;
+
+        function renderGallery(filter = 'all') {
+            const galleryGrid = document.getElementById('galleryGrid');
+            if (!galleryGrid) return;
+            
+            const filteredItems = filter === 'all' 
+                ? galleryData 
+                : galleryData.filter(item => item.category === filter);
+            
+            currentFilteredItems = filteredItems;
+            
+            galleryGrid.innerHTML = filteredItems.map((item, index) => `
+                <div class="gallery-item" data-category="${item.category}" data-index="${index}" onclick="openLightbox(${index})">
+                    <img src="${item.src}" alt="${item.caption}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p>${item.caption}</p>
+                        <p style="font-size: 14px; margin-top: 5px;">${item.price} Rwf</p>
+                    </div>
+                    <button class="gallery-order-btn" onclick="event.stopPropagation(); orderFromGallery('${item.caption.replace(/'/g, "\\'")}', '${item.price}')">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderGallery(this.dataset.filter);
+            });
+        });
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            
+            if (lightbox && lightboxImg && currentFilteredItems.length > 0) {
+                currentLightboxIndex = index;
+                currentLightboxItem = currentFilteredItems[index];
+                
+                lightboxImg.src = currentLightboxItem.src;
+                if (lightboxCaption) lightboxCaption.textContent = `${currentLightboxItem.caption} - ${currentLightboxItem.price} Rwf`;
+                if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${currentFilteredItems.length}`;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function navigateLightbox(direction) {
+            if (currentFilteredItems.length === 0) return;
+            
+            let newIndex = currentLightboxIndex + direction;
+            if (newIndex < 0) newIndex = currentFilteredItems.length - 1;
+            if (newIndex >= currentFilteredItems.length) newIndex = 0;
+            
+            openLightbox(newIndex);
+        }
+
+        // Order from gallery card
+        window.orderFromGallery = function(productName, price) {
+            openOrderPopup(productName, price);
+        };
+
+        // Order from lightbox
+        window.orderFromLightbox = function() {
+            if (currentLightboxItem) {
+                openOrderPopup(currentLightboxItem.caption, currentLightboxItem.price);
+                closeLightbox();
+            }
+        };
+
+        // Order Popup Functions
+        let currentProductName = '';
+        let currentProductPrice = '';
+        const orderModal = document.getElementById('orderModal');
+
+        function openOrderPopup(productName, price) {
+            if (!orderModal) return;
+            
+            currentProductName = productName;
+            currentProductPrice = price;
+            
+            document.getElementById('selectedProductName').textContent = `Product: ${productName}`;
+            document.getElementById('selectedProductPrice').textContent = `Price: ${price} Rwf`;
+            
+            orderModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeOrderPopup = function() {
+            if (!orderModal) return;
+            orderModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        window.sendToWhatsApp = function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('customerName')?.value || '';
+            const email = document.getElementById('customerEmail')?.value || '';
+            const phone = document.getElementById('customerPhone')?.value || '';
+            const quantity = document.getElementById('orderQuantity')?.value || '1';
+            const address = document.getElementById('shippingAddress')?.value || '';
+            const notes = document.getElementById('orderNotes')?.value || '';
+            
+            if (!name || !email || !phone || !address) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            const message = `🛍️ *NEW ORDER - LUCKYCROCHET*%0A%0A` +
+                           `*Product:* ${currentProductName}%0A` +
+                           `*Price:* ${currentProductPrice} Rwf%0A` +
+                           `*Quantity:* ${quantity}%0A%0A` +
+                           `*Customer:* ${name}%0A` +
+                           `*Email:* ${email}%0A` +
+                           `*Phone:* ${phone}%0A` +
+                           `*Address:* ${address}%0A` +
+                           `*Notes:* ${notes || 'None'}`;
+            
+            window.open(`https://wa.me/250790702735?text=${message}`, '_blank');
+            closeOrderPopup();
+            alert('Murakoze! Thank you! Redirecting to WhatsApp...');
+        };
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft' && lightbox && lightbox.classList.contains('active')) {
+                navigateLightbox(-1);
+            } else if (e.key === 'ArrowRight' && lightbox && lightbox.classList.contains('active')) {
+                navigateLightbox(1);
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === orderModal) closeOrderPopup();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGallery('all');
+            
+            // Set active nav link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage) link.classList.add('active');
+            });
+        });
+
+        console.log('✨ Gallery loaded! 224 products with Order Now buttons!');
+    </script>
+</body>
+</html>

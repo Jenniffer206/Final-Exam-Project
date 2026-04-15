@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUCKYCROCHET - Handmade Crochet Store</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================================= -->
+    <!-- HEADER SECTION (Semantic HTML5) -->
+    <!-- ========================================= -->
+    <header>
+        <!-- PROMO BAR -->
+        <div class="promo-bar">
+            <span>Buy something new with <strong>10% Off</strong> your next purchase. Use promo code: <strong>LUCKY10</strong></span>
+        </div>
+
+        <!-- STICKY NAVIGATION -->
+        <nav class="main-nav" id="mainNav">
+            <a href="index.html" class="logo">LUCKYCROCHET</a>
+            
+            <!-- Hamburger Menu Button (Mobile) -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Home</a>
+                <a href="htmlpages/about.html">About Us</a>
+                <a href="htmlpages/services.html">Services</a>
+                <a href="htmlpages/gallery.html">Gallery</a>
+                <a href="htmlpages/blog.html">Blog</a>
+                <a href="htmlpages/contact.html">Contact</a>
+            </div>
+            
+            <div class="nav-icons">
+                <button id="darkModeToggle" class="dark-mode-btn" aria-label="Dark mode toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <span><i class="fas fa-search"></i></span>
+                <span><i class="fas fa-user"></i></span>
+                <span><i class="fas fa-shopping-bag"></i></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ========================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================================= -->
+    <main>
+        <!-- HERO SECTION WITH VIDEO BACKGROUND -->
+        <section class="hero">
+            <!-- Video Background -->
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="videos/market-video.mp4" type="video/mp4">
+                <img src="https://images.pexels.com/photos/4792085/pexels-photo-4792085.jpeg" alt="Crochet Background">
+            </video>
+            <!-- Overlay -->
+            <div class="hero-overlay"></div>
+            <!-- Content -->
+            <div class="hero-content">
+                <h1>HANDMADE WITH LOVE</h1>
+                <p>Discover our collection of unique crochet pieces for every style and occasion.</p>
+                <div class="promo-code">LUCKY10</div>
+                <br>
+                <button class="shop-btn" onclick="scrollToProducts()">SHOP NEW ARRIVALS</button>
+            </div>
+        </section>
+
+        <!-- IMAGE SLIDER / CAROUSEL SECTION -->
+        <section class="carousel-section">
+            <h2 class="section-header">Featured Collections</h2>
+            <div class="carousel-container">
+                <div class="carousel-slides" id="carouselSlides">
+                    <div class="slide active">
+                        <img src="slideshow/W&G%20Product%20(81).png" alt="Women & Girls Collection">
+                        <div class="slide-caption">Women & Girls Collection</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Bag%20(7).png" alt="Bags Collection">
+                        <div class="slide-caption">Handmade Bags</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Hat%20(5).png" alt="Hats Collection">
+                        <div class="slide-caption">Stylish Hats</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Kid_Product%20(23).png" alt="Kids Collection">
+                        <div class="slide-caption">Baby & Kids</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/W&G%20Product%20(30).png" alt="Women Collection">
+                        <div class="slide-caption">Women's Collection</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Blanket%20(5).png" alt="Blankets Collection">
+                        <div class="slide-caption">Cozy Blankets</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/W&G%20Product%20(20).png" alt="Crochet Collection">
+                        <div class="slide-caption">New Arrivals</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Head%20Product%20(13).png" alt="Accessories">
+                        <div class="slide-caption">Headbands & Accessories</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Hat%20(4).png" alt="Hats">
+                        <div class="slide-caption">Trending Hats</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Head%20Product%20(17).png" alt="Headbands">
+                        <div class="slide-caption">Headband Collection</div>
+                    </div>
+                    <div class="slide">
+                        <img src="slideshow/Head%20Product%20(6).png" alt="Bath Gloves">
+                        <div class="slide-caption">Bath Gloves Set</div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+        <!-- NEW ARRIVALS SECTION -->
+        <section class="products-section" id="newArrivals">
+            <h2 class="section-header">New Arrivals</h2>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <article class="product-card">
+                    <div class="product-image img1"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">Handmade Baby dressing</h3>
+                    <div class="product-price">15,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\kids.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('Handmade Baby Dressing', '15,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 2 -->
+                <article class="product-card">
+                    <div class="product-image img2"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">Top with Skirt</h3>
+                    <div class="product-price">25,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\women-girls.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('Top with Skirt', '25,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 3 -->
+                <article class="product-card">
+                    <div class="product-image img3"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">RUDA Sweater</h3>
+                    <div class="product-price">35,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\men.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('RUDA Sweater', '35,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 4 -->
+                <article class="product-card">
+                    <div class="product-image img4"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">Top with Short</h3>
+                    <div class="product-price">23,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\women-girls.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('Top with Short', '23,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 5 -->
+                <article class="product-card">
+                    <div class="product-image img5"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">Blanket</h3>
+                    <div class="product-price">40,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\blankets.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('Blanket', '40,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 6 -->
+                <article class="product-card">
+                    <div class="product-image img6"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">Hats</h3>
+                    <div class="product-price">12,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\hats.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('hats', '12,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 7 -->
+                <article class="product-card">
+                    <div class="product-image img7"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name">Bags</h3>
+                    <div class="product-price">25,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\bags.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('Bags', '25,000')">Order Now</button>
+                    </div>
+                </article>
+                <!-- Product 8 -->
+                <article class="product-card">
+                    <div class="product-image img8"></div>
+                    <div class="product-brand">LUCKYCROCHET</div>
+                    <h3 class="product-name"> Bath glooves</h3>
+                    <div class="product-price">8,000</div>
+                    <div class="product-buttons">
+                        <a href="d:\EXAM School Project\htmlpages\accessories.html" class="view-more-btn">View More</a>
+                        <button class="order-btn" onclick="openOrderPopup('Bath Gloves', '8,000')">Order Now</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- FEATURED CATEGORIES SECTION -->
+        <section class="categories-section">
+            <h2 class="section-header">Shop by Category</h2>
+            <div class="category-grid">
+                <article class="category-card">
+                    <div class="category-image cat1"></div>
+                    <h3>Women & Girls</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-image cat2"></div>
+                    <h3>Men</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-image cat3"></div>
+                    <h3>Baby & Children</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-image cat4"></div>
+                    <h3>Bags</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-image cat5"></div>
+                    <h3>Hats</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-image cat6"></div>
+                    <h3>Headband & Gloves</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-image cat7"></div>
+                    <h3>Blankets</h3>
+                </article>
+            </div>
+        </section>
+                       <!-- ALL OUR PRODUCTS SECTION -->
+        <section class="all-products-section">
+            <h2 class="section-header">All Our Products</h2>
+            <p class="section-subtitle">Browse our complete collection of handmade crochet items</p>
+            <div class="all-products-grid">
+                <!-- Women & Girls -->
+                <a href="d:\EXAM School Project\htmlpages\women-girls.html" class="product-category-card">
+                    <div class="category-card-image" style="background-image: url('Images/Women%20&%20Girls/W&G%20Product%20(1).png')"></div>
+                    <h3>Women & Girls</h3>
+                    <p>105 Products</p>
+                    <span class="category-arrow">→</span>
+                </a>
+                <!-- Men -->
+                <a href="d:\EXAM School Project\htmlpages\men.html" class="product-category-card">
+                    <div class="category-card-image" style="background-image: url('Images/Men/Men_Product%20(1).png')"></div>
+                    <h3>Men</h3>
+                    <p>27 Products</p>
+                    <span class="category-arrow">→</span>
+                </a>
+                <!-- Baby & Children -->
+                <a href="d:\EXAM School Project\htmlpages\kids.html" class="product-category-card">
+                    <div class="category-card-image" style="background-image: url('Images/Kids/Kid_Product%20(1).png')"></div>
+                    <h3>Baby & Children</h3>
+                    <p>31 Products</p>
+                    <span class="category-arrow">→</span>
+                </a>
+                <!-- Bags -->
+                <a href="d:\EXAM School Project\htmlpages\bags.html" class="product-category-card">
+                    <div class="category-card-image" style="background-image: url('Images/Bags/Bag%20(1).png')"></div>
+                    <h3>Bags</h3>
+                    <p>10 Products</p>
+                    <span class="category-arrow">→</span>
+                </a>
+                <!-- Hats -->
+                <a href="d:\EXAM School Project\htmlpages\hats.html" class="product-category-card">
+                    <div class="category-card-image" style="background-image: url('Images/Hats/Hat%20(1).png')"></div>
+                    <h3>Hats</h3>
+                    <p>24 Products</p>
+                    <span class="category-arrow">→</span>
+                </a>
+                <!-- Blankets -->
+                <a href="d:\EXAM School Project\htmlpages\blankets.html" class="product-category-card">
+                    <div class="category-card-image" style="background-image: url('Images/Blanket/Blanket%20(1).png')"></div>
+                    <h3>Blankets</h3>
+                    <p>9 Products</p>
+                    <span class="category-arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- DYNAMIC GREETING SECTION -->
+        <section class="greeting-section">
+            <div class="greeting-container">
+                <div id="dynamicGreeting" class="greeting-message"></div>
+                <div id="realTimeClock" class="real-time-clock"></div>
+            </div>
+        </section>
+
+        <!-- DYNAMIC GREETING SECTION -->
+        <section class="greeting-section">
+            <div class="greeting-container">
+                <div id="dynamicGreeting" class="greeting-message"></div>
+                <div id="realTimeClock" class="real-time-clock"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================= -->
+    <!-- FOOTER SECTION -->
+    <!-- ========================================= -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>LUCKYCROCHET</h4>
+                <p>Handmade with love, stitch by stitch. Quality crochet items for every occasion.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <div class="footer-links">
+                    <a href="#">Shipping & Returns</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-phone"></i> +250 791 799 989</p>
+                <p><i class="fas fa-envelope"></i> niyomungerijenniffer@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> CHIC , Kigali city, Rwanda</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 LUCKYCROCHET - Handmade with Love. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================= -->
+    <!-- ORDER POPUP MODAL -->
+    <!-- ========================================= -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Place Your Order</h2>
+                <button class="modal-close" onclick="closeOrderPopup()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="selectedProductName" class="selected-product"></p>
+                <p id="selectedProductPrice" class="selected-price"></p>
+                
+                <form id="orderForm" onsubmit="sendToWhatsApp(event)">
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail">Email Address *</label>
+                        <input type="email" id="customerEmail" name="customerEmail" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number (with country code) *</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" placeholder="+1234567890" required>
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderQuantity">Quantity *</label>
+                        <input type="number" id="orderQuantity" name="orderQuantity" min="1" value="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderColor">Color Preference</label>
+                        <select id="orderColor" name="orderColor">
+                            <option value="As shown in picture">As shown in picture</option>
+                            <option value="Beige">Beige</option>
+                            <option value="Cream">Cream</option>
+                            <option value="Brown">Brown</option>
+                            <option value="Custom (specify in notes)">Custom (specify in notes)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shippingAddress">Shipping Address *</label>
+                        <textarea id="shippingAddress" name="shippingAddress" rows="3" required></textarea>
+                        <span class="error-message" id="addressError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderNotes">Additional Notes (Size, Custom requests)</label>
+                        <textarea id="orderNotes" name="orderNotes" rows="2" placeholder="Any special requests or size details..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Contact Method *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="contactMethod" value="WhatsApp" checked> WhatsApp</label>
+                            <label><input type="radio" name="contactMethod" value="Email"> Email</label>
+                            <label><input type="radio" name="contactMethod" value="Phone"> Phone Call</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-order-btn">
+                        <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
