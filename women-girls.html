@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Headband & Bath Gloves - LUCKYCROCHET</title>
+    <title>Women & Girls Collection - LUCKYCROCHET</title>
+    <!-- Also fix CSS paths to go up one level -->
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../cssfiles/category.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -14,7 +15,6 @@
     </style>
 </head>
 <body>
-    <!-- HEADER SECTION -->
     <header>
         <div class="promo-bar">
             <span>Buy something new with <strong>10% Off</strong> your next purchase. Use promo code: <strong>LUCKY10</strong></span>
@@ -25,12 +25,12 @@
                 <span></span><span></span><span></span>
             </div>
             <div class="nav-links" id="navLinks">
-                <a href="../index.html">Home</a>
-                <a href="../about.html">About Us</a>
-                <a href="../services.html">Services</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
                 <a href="gallery.html">Gallery</a>
                 <a href="blog.html">Blog</a>
-                <a href="../contact.html">Contact</a>
+                <a href="contact.html">Contact</a>
             </div>
             <div class="nav-icons">
                 <button id="darkModeToggle" class="dark-mode-btn"><i class="fas fa-moon"></i></button>
@@ -41,13 +41,12 @@
         </nav>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main>
         <section class="category-header">
-            <h1>Headband & Bath Gloves Collection</h1>
-            <p>Soft and stylish crochet accessories for everyday use</p>
+            <h1>Women & Girls Collection</h1>
+            <p>Handcrafted crochet pieces designed for every style and occasion</p>
             <div class="category-stats">
-                <div class="stat-item"><i class="fas fa-box"></i><span>18 Products</span></div>
+                <div class="stat-item"><i class="fas fa-box"></i><span>105 Products</span></div>
                 <div class="stat-item"><i class="fas fa-truck"></i><span>Free Shipping $75+</span></div>
                 <div class="stat-item"><i class="fas fa-undo"></i><span>14-Day Returns</span></div>
             </div>
@@ -69,12 +68,11 @@
         </div>
 
         <div class="category-product-grid" id="categoryProductGrid">
-            <p style="text-align:center;padding:40px;grid-column:1/-1;">Loading products...</p>
+            <p style="text-align: center; padding: 40px; grid-column: 1/-1;">Loading products...</p>
         </div>
         <div class="pagination-container"><div class="pagination" id="pagination"></div></div>
     </main>
 
-    <!-- FOOTER SECTION -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -111,9 +109,8 @@
             </div>
             <div class="footer-section">
                 <h4>Contact Info</h4>
-                <p><i class="fas fa-phone"></i> +250 790 702 735</p>
-                <p><i class="fas fa-envelope"></i> niyomungerijenniffer@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> CHIC, Kigali city, Rwanda</p>
+                <p><i class="fas fa-phone"></i> +250 791 799 989</p>
+                <p><i class="fas fa-envelope"></i> niyomunger@gmail.com</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -121,11 +118,10 @@
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Order Modal -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -140,10 +136,8 @@
                     <div class="form-group"><label>Email *</label><input type="email" id="customerEmail" required></div>
                     <div class="form-group"><label>Phone *</label><input type="tel" id="customerPhone" required></div>
                     <div class="form-group"><label>Quantity *</label><input type="number" id="orderQuantity" min="1" value="1" required></div>
-                    <div class="form-group"><label>Color Preference</label><select id="orderColor"><option>As shown</option><option>Pink</option><option>Blue</option><option>Cream</option><option>Brown</option></select></div>
                     <div class="form-group"><label>Shipping Address *</label><textarea id="shippingAddress" rows="3" required></textarea></div>
-                    <div class="form-group"><label>Additional Notes</label><textarea id="orderNotes" rows="2"></textarea></div>
-                    <button type="submit" class="submit-order-btn"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+                    <button type="submit" class="submit-order-btn"><i class="fab fa-whatsapp"></i> Send Order via WhatsApp</button>
                 </form>
             </div>
         </div>
@@ -178,22 +172,17 @@
             });
         }
 
-        // PRODUCT DATA - 18 Products with YOUR actual images
+        // PRODUCT DATA - FIXED WITH ../ TO GO UP ONE LEVEL
         const categoryProducts = [];
-        
-        // Using the actual images from Headband & Bath gloves folder
-        for (let i = 1; i <= 18; i++) {
-            // Generate realistic prices between 4500 and 8000 Rwf
-            const basePrice = Math.floor(Math.random() * 4000) + 4500;
-            
+        for (let i = 1; i <= 105; i++) {
             categoryProducts.push({
                 id: i,
-                name: i <= 9 ? `Crochet Headband - Style ${i}` : `Bath Glove Set - Style ${i - 9}`,
+                name: `Women's Crochet - Style ${i}`,
                 brand: 'LUCKYCROCHET',
-                price: basePrice.toString(),
-                originalPrice: i % 3 === 0 ? (basePrice + 1500).toString() : null,
-                image: `../Images/Headband%20&%20Bath%20gloves/Headband%20(${i}).png`,
-                badge: i <= 4 ? 'new' : (i % 4 === 0 ? 'sale' : null)
+                price: (Math.floor(Math.random() * 80) + 25).toFixed(2),
+                originalPrice: i % 3 === 0 ? (Math.floor(Math.random() * 60) + 40).toFixed(2) : null,
+                image: `../Images/Women%20&%20Girls/W&G%20Product%20(${i}).png`,
+                badge: i <= 10 ? 'new' : (i % 7 === 0 ? 'sale' : null)
             });
         }
 
@@ -215,12 +204,12 @@
             grid.innerHTML = pageProducts.map(p => `
                 <div class="category-product-card">
                     ${p.badge ? `<span class="product-badge ${p.badge}">${p.badge.toUpperCase()}</span>` : ''}
-                    <div class="product-image" style="background-image: url('${p.image}')"></div>
+                    <div class="product-image" style="background-image: url('${p.image}');"></div>
                     <div class="product-brand">${p.brand}</div>
                     <div class="product-name">${p.name}</div>
                     <div class="product-price">
-                        ${p.price} Rwf
-                        ${p.originalPrice ? `<span class="original-price">${p.originalPrice} Rwf</span>` : ''}
+                        $${p.price}
+                        ${p.originalPrice ? `<span class="original-price">$${p.originalPrice}</span>` : ''}
                     </div>
                     <div class="product-actions">
                         <a href="#" class="view-btn">View More</a>
@@ -239,7 +228,6 @@
             
             let html = '';
             if (currentPage > 1) html += `<a href="#" class="page-link" data-page="${currentPage - 1}"><i class="fas fa-chevron-left"></i></a>`;
-            
             for (let i = 1; i <= totalPages; i++) {
                 if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
                     html += `<a href="#" class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>`;
@@ -247,7 +235,6 @@
                     html += `<span class="page-link">...</span>`;
                 }
             }
-            
             if (currentPage < totalPages) html += `<a href="#" class="page-link" data-page="${currentPage + 1}"><i class="fas fa-chevron-right"></i></a>`;
             pagination.innerHTML = html;
 
@@ -263,13 +250,9 @@
 
         document.getElementById('sortSelect')?.addEventListener('change', (e) => {
             const sort = e.target.value;
-            if (sort === 'price-low') {
-                filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-            } else if (sort === 'price-high') {
-                filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-            } else {
-                filteredProducts = [...categoryProducts];
-            }
+            if (sort === 'price-low') filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            else if (sort === 'price-high') filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            else filteredProducts = [...categoryProducts];
             currentPage = 1;
             renderProducts();
         });
@@ -279,12 +262,10 @@
                 document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 currentView = this.dataset.view;
-                document.getElementById('categoryProductGrid').className = 
-                    `category-product-grid ${currentView === 'list' ? 'list-view' : ''}`;
+                document.getElementById('categoryProductGrid').className = `category-product-grid ${currentView === 'list' ? 'list-view' : ''}`;
             });
         });
 
-        // Order Popup
         const orderModal = document.getElementById('orderModal');
         
         window.openOrderPopup = function(productName, price) {
@@ -292,7 +273,7 @@
             currentProductName = productName;
             currentProductPrice = price;
             document.getElementById('selectedProductName').textContent = `Product: ${productName}`;
-            document.getElementById('selectedProductPrice').textContent = `Price: ${price} Rwf`;
+            document.getElementById('selectedProductPrice').textContent = `Price: $${price}`;
             orderModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         };
@@ -305,48 +286,34 @@
 
         window.sendToWhatsApp = function(event) {
             event.preventDefault();
-            
             const name = document.getElementById('customerName')?.value || '';
             const email = document.getElementById('customerEmail')?.value || '';
             const phone = document.getElementById('customerPhone')?.value || '';
             const quantity = document.getElementById('orderQuantity')?.value || '1';
-            const color = document.getElementById('orderColor')?.value || 'As shown';
             const address = document.getElementById('shippingAddress')?.value || '';
-            const notes = document.getElementById('orderNotes')?.value || '';
             
             if (!name || !email || !phone || !address) {
                 alert('Please fill all required fields');
                 return;
             }
             
-            const message = `🛍️ *NEW ORDER - LUCKYCROCHET*%0A%0A` +
-                           `*Product:* ${currentProductName}%0A` +
-                           `*Price:* ${currentProductPrice} Rwf%0A` +
-                           `*Quantity:* ${quantity}%0A` +
-                           `*Color:* ${color}%0A%0A` +
-                           `*Customer:* ${name}%0A` +
-                           `*Email:* ${email}%0A` +
-                           `*Phone:* ${phone}%0A` +
-                           `*Address:* ${address}%0A` +
-                           `*Notes:* ${notes || 'None'}`;
-            
-            window.open(`https://wa.me/250790702735?text=${message}`, '_blank');
+            const message = `🛍️ *NEW ORDER - LUCKYCROCHET*%0A%0A*Product:* ${currentProductName}%0A*Price:* $${currentProductPrice}%0A*Quantity:* ${quantity}%0A%0A*Customer:* ${name}%0A*Email:* ${email}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
+            window.open(`https://wa.me/12345678900?text=${message}`, '_blank');
             closeOrderPopup();
-            alert('Murakoze! Thank you! Redirecting to WhatsApp...');
+            alert('Redirecting to WhatsApp...');
         };
 
         window.addEventListener('click', (e) => { if (e.target === orderModal) closeOrderPopup(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeOrderPopup(); });
 
-        // Back to Top
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('backToTop');
             if (btn) btn.classList[window.scrollY > 300 ? 'add' : 'remove']('show');
         });
 
-        // Initialize
+        // Render everything
         renderProducts();
-        console.log('✅ Accessories page loaded! 18 products with images from Headband & Bath gloves folder!');
+        console.log('✅ Page loaded successfully! Images path uses ../ to go up one level!');
     </script>
 </body>
 </html>
